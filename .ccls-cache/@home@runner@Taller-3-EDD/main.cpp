@@ -5,8 +5,8 @@
 #include <set>
 #include <string.h>
 #include <stdio.h>
-#include "ArbolBinario.h"
-#include "NodoBinario.h"
+#include "avl.hxx"
+
 
 
 using namespace std;
@@ -140,11 +140,38 @@ void imprimirset(set<std::string> mySet){
   }
 }
 
+MyResult  benchmark3(std::vector<std::vector<string> > elVector)
+{
+  MyResult result;
+  Node *root = NULL;
+  for (const auto& vec : elVector){
+    if(vec[0].compare("A") == 0){
+        std::clock_t init_time = std::clock();
+        root = insert(root, stoi(vec[1]));
+        std::clock_t end_time = std::clock();
+        double calc_time = ( end_time - init_time ) / double( CLOCKS_PER_SEC );
+        //std::cout << "It took me  "<< calc_time << " seconds."<<std::endl;
+        result.insertTimes.push_back(calc_time);
+      }
+      else if (vec[0].compare("E") == 0){
+        std::clock_t init_time = std::clock();
+        root = deleteNode(root, stoi(vec[1]));
+        std::clock_t end_time = std::clock();
+        double calc_time = ( end_time - init_time ) / double( CLOCKS_PER_SEC );
+        //std::cout << "It took me  "<< calc_time << " seconds."<<std::endl;
+        result.eraseTimes.push_back(calc_time);
+      }
+  }
+  std::cout << "In orden AVl = : "<<std::endl;
+  inOrder(root);
+  return result;
+}
 int main(int argc, char *argv[]) 
 {
   std::cout << "argv "<<argv[1]<<std::endl;
   string arch = argv[1];
   MyResult result;
+  MyResult result2;
   std::set<std::string> mySet;
   std::vector<std::vector<string> > vequi;
   std::set<string> arbolrn;
@@ -155,16 +182,29 @@ int main(int argc, char *argv[])
   // imprimirset(mySet);
   std::cout << "con struct"<<std::endl;
   result = benchmark2(vequi);
+  result2 = benchmark3(vequi);
   imprimirset(result.mySet);
   double tiempoinsert = 0;
   double tiempoerase= 0;
+  double tiempoinsertavl = 0;
+  double tiempoeraseavl= 0;
   for(auto insert : result.insertTimes){
     tiempoinsert += insert;
   }
+  for(auto insert : result2.insertTimes){
+    tiempoinsertavl += insert;
+  }
   std::cout << "EL TIEMPO DE INSERCIONES ES : "<<tiempoinsert<<std::endl;
+  std::cout << "EL TIEMPO DE INSERCIONES EN AVL ES : "<<tiempoinsertavl<<std::endl;
   for(auto insert : result.eraseTimes){
     tiempoerase += insert;
   }
+  for(auto delet : result2.eraseTimes){
+    tiempoeraseavl += delet;
+  }
   std::cout << "EL TIEMPO DE ERASE ES : "<<tiempoerase<<std::endl;
+  std::cout << "EL TIEMPO DE ERASE EN AVL ES : "<<tiempoeraseavl<<std::endl;
+  
+  
 }
 
