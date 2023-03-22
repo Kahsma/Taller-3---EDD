@@ -1,0 +1,28 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+data = np.genfromtxt('insert_timesR1.csv', delimiter=',')
+
+plt.hist(data, bins=20)
+plt.title('Insert Times "SET" Histogram')
+plt.xlabel('Time (s)')
+plt.ylabel('Count')
+plt.show()
+data = np.genfromtxt('insert_timesR2.csv', delimiter=',')
+plt.hist(data, bins=20)
+plt.title('Insert Times "AVL" Histogram')
+plt.xlabel('Time (s)')
+plt.ylabel('Count')
+plt.show()
+data = np.genfromtxt('erase_timesR1.csv', delimiter=',')
+plt.hist(data, bins=20)
+plt.title('Erase Times "SET" Histogram')
+plt.xlabel('Time (s)')
+plt.ylabel('Count')
+plt.show()
+data = np.genfromtxt('erase_timesR2.csv', delimiter=',')
+plt.hist(data, bins=20)
+plt.title('Erase times "SET" Histogram')
+plt.xlabel('Time (s)')
+plt.ylabel('Count')
+plt.show()
