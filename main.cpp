@@ -6,6 +6,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "avl.hxx"
+#include <list>
 
 using namespace std;
 
@@ -172,7 +173,9 @@ MyResult benchmark3(std::vector<std::vector<string>> elVector)
     }
   }
   std::cout << "In orden AVl = : " << std::endl;
-  inOrder(root);
+
+  list<int> laLista;
+  inOrder(root, laLista);
   return result;
 }
 int main(int argc, char *argv[])
@@ -193,6 +196,8 @@ int main(int argc, char *argv[])
   std::cout << "con struct" << std::endl;
   result = benchmark2(vequi);
   result2 = benchmark3(vequi);
+  std::cout << '\n';
+  std::cout << "inorden set" << endl;
   imprimirset(result.mySet);
   double tiempoinsert = 0;
   double tiempoerase = 0;
