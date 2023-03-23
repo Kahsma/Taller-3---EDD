@@ -167,7 +167,7 @@ MyResult benchmark3(std::vector<std::vector<string>> elVector)
       root = deleteNode(root, stoi(vec[1]));
       std::clock_t end_time = std::clock();
       double calc_time = (end_time - init_time) / double(CLOCKS_PER_SEC);
-      std::cout << "It took me  " << calc_time << " seconds." << std::endl;
+      // std::cout << "It took me  " << calc_time << " seconds." << std::endl;
       result.eraseTimes.push_back(calc_time);
     }
   }
